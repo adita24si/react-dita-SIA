@@ -1,0 +1,117 @@
+/* Background halaman */
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #050505, #000000 70%);
+    color: #e5e5e5;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Card utama */
+.card {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 14px;
+    text-align: center;
+    background: #0b0b0b;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 0 20px rgba(0,255,170,0.15),
+        inset 0 0 25px rgba(0,0,0,0.8);
+}
+
+/* Border RGB animasi */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 14px;
+    background: linear-gradient(
+        60deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    background-size: 500%;
+    z-index: -1;
+    animation: rgbBorder 6s linear infinite;
+}
+
+/* Animasi border */
+@keyframes rgbBorder {
+    0% { background-position: 0% }
+    100% { background-position: 500% }
+}
+
+/* Logo */
+.logo {
+    width: 200px;
+    margin-bottom: 20px;
+    filter: 
+        drop-shadow(0 0 8px #00ff9d)
+        drop-shadow(0 0 20px #00ff9d);
+}
+
+/* Judul */
+h1 {
+    font-size: 34px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: linear-gradient(90deg,#ff0000,#00ff9d,#00e1ff,#7a00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+/* Glow effect */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(0,255,150,0.2);
+    }
+    to {
+        text-shadow: 
+            0 0 10px #00ff9d,
+            0 0 20px #00ff9d,
+            0 0 40px #00ff9d;
+    }
+}
+
+/* Paragraf */
+p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #cfcfcf;
+}
+
+/* Garis RGB */
+hr {
+    border: none;
+    height: 2px;
+    margin: 20px 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ff0000,
+        #00ff9d,
+        #00e1ff,
+        #7a00ff,
+        transparent
+    );
+}
+
+/* Small text */
+small {
+    display: block;
+    margin-top: 12px;
+    color: #888;
+    font-size: 13px;
+}
