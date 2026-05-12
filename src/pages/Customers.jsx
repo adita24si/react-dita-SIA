@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // 1. Tambahkan Link di sini
 import {
   FaSearch,
   FaUserPlus,
@@ -26,15 +26,20 @@ function LoyaltyBadge({ loyalty }) {
   );
 }
 
+// 2. BAGIAN INI YANG DIUBAH AGAR BISA DIKLIK
 function TableRow({ id, name, email, phone, loyalty }) {
   return (
     <tr className="border-t hover:bg-gray-50 transition">
       <td className="px-6 py-4 text-gray-500">#{id}</td>
 
-      <td className="px-6 py-4 font-medium text-gray-800">{name}</td>
+      {/* Nama sekarang menggunakan Link agar bisa ditekan */}
+      <td className="px-6 py-4 font-medium text-blue-600 hover:underline cursor-pointer">
+        <Link to={`/customers/${id}`}>
+          {name}
+        </Link>
+      </td>
 
       <td className="px-6 py-4 text-gray-500">{email}</td>
-
       <td className="px-6 py-4 text-gray-500">{phone}</td>
 
       <td className="px-6 py-4">
@@ -43,9 +48,13 @@ function TableRow({ id, name, email, phone, loyalty }) {
 
       <td className="px-6 py-4">
         <div className="flex gap-3">
-          <button className="text-blue-500 hover:underline text-sm flex items-center gap-1">
+          {/* Tombol View juga menggunakan Link */}
+          <Link 
+            to={`/customers/${id}`} 
+            className="text-blue-500 hover:underline text-sm flex items-center gap-1"
+          >
             <FaEye /> View
-          </button>
+          </Link>
 
           <button className="text-red-500 hover:underline text-sm flex items-center gap-1">
             <FaTrashAlt /> Delete
@@ -81,18 +90,11 @@ export default function Customers() {
 
   return (
     <div className="p-6">
-
-      {/* HEADER */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-800">
-            Customers
-          </h1>
-          <p className="text-sm text-gray-400">
-            Manage your customers data
-          </p>
+          <h1 className="text-2xl font-semibold text-gray-800">Customers</h1>
+          <p className="text-sm text-gray-400">Manage your customers data</p>
         </div>
-
         <button
           onClick={() => navigate("/customers/add")}
           className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl shadow"
@@ -101,7 +103,6 @@ export default function Customers() {
         </button>
       </div>
 
-      {/* SEARCH */}
       <div className="relative mb-5 w-80">
         <input
           placeholder="Search customer..."
@@ -115,7 +116,6 @@ export default function Customers() {
         <FaSearch className="absolute left-3 top-3 text-gray-400 text-sm" />
       </div>
 
-      {/* TABLE CARD */}
       <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-gray-50 text-gray-500 text-sm">
@@ -128,29 +128,21 @@ export default function Customers() {
               <th className="px-6 py-4">Action</th>
             </tr>
           </thead>
-
           <tbody>
             {currentData.map((c) => (
               <TableRow key={c.id} {...c} />
             ))}
-
             {currentData.length === 0 && (
               <tr>
-                <td colSpan="6" className="text-center py-10 text-gray-400">
-                  No customers found
-                </td>
+                <td colSpan="6" className="text-center py-10 text-gray-400">No customers found</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
 
-      {/* PAGINATION */}
       <div className="flex justify-between items-center mt-5">
-        <p className="text-sm text-gray-500">
-          Page {currentPage} of {totalPages}
-        </p>
-
+        <p className="text-sm text-gray-500">Page {currentPage} of {totalPages}</p>
         <div className="flex gap-2">
           <button
             onClick={() => setCurrentPage((p) => p - 1)}
@@ -159,7 +151,6 @@ export default function Customers() {
           >
             <FaChevronLeft />
           </button>
-
           <button
             onClick={() => setCurrentPage((p) => p + 1)}
             disabled={currentPage === totalPages}

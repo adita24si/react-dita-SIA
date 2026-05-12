@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import "./assets/tailwind.css";
 import { Routes, Route } from "react-router-dom";
 
-// --- LAZY LOADING (TARUH DI LUAR FUNGSI APP) ---
+// --- LAZY LOADING ---
 
 // Layouts
 const MainLayout = React.lazy(() => import("./layouts/MainLayout"));
@@ -16,10 +16,15 @@ const AddCustomer = React.lazy(() => import("./pages/AddCustomer"));
 const AddOrder = React.lazy(() => import("./pages/AddOrder"));
 const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
 
-// Auth Pages
+// Auth & Detail Pages
 const Login = React.lazy(() => import("./pages/auth/Login"));
 const Register = React.lazy(() => import("./pages/auth/Register"));
 const Forgot = React.lazy(() => import("./pages/auth/Forgot"));
+const Products = React.lazy(() => import("./pages/auth/products"));
+const ProductDetail = React.lazy(() => import("./pages/auth/ProductsDetail"));
+
+// TAMBAHKAN INI: Lazy load untuk CustomerDetail
+const CustomerDetail = React.lazy(() => import("./pages/auth/CustomerDetail"));
 
 function App() {
   return (
@@ -28,10 +33,20 @@ function App() {
         {/* Grup Main Layout */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Dashboard />} />
+          
+          {/* CUSTOMERS ROUTES */}
           <Route path="/customers" element={<Customers />} />
           <Route path="/customers/add" element={<AddCustomer />} />
+          {/* TAMBAHKAN INI: Route untuk detail customer */}
+          <Route path="/customers/:id" element={<CustomerDetail />} />
+
+          {/* ORDERS ROUTES */}
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/add" element={<AddOrder />} />
+
+          {/* PRODUCTS ROUTES */}
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
 
           {/* Error Routes */}
           <Route path="/400" element={<ErrorPage code="400" description="Bad Request." image="/img/400.png" />} />
