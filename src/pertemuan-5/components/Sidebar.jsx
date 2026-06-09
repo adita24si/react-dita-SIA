@@ -28,6 +28,11 @@ export default function Sidebar() {
             <FaHeadphones className="text-gray-400" />
             Customers
           </li>
+
+           <li className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white hover:shadow-sm cursor-pointer">
+            <FaHeadphones className="text-gray-400" />
+              Notes
+          </li>
         </ul>
       </div>
 

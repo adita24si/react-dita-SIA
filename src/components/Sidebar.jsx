@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaThLarge, FaList, FaHeadphones, FaBoxOpen } from "react-icons/fa";
+import { FaThLarge, FaList, FaHeadphones, FaBoxOpen, FaStickyNote } from "react-icons/fa";
 
 export default function Sidebar() {
   // styling menu active
@@ -75,6 +75,18 @@ export default function Sidebar() {
                 <>
                   <FaBoxOpen className={iconClass(isActive)} />
                   Products
+                </>
+              )}
+            </NavLink>
+          </li>
+
+          {/* Notes */}
+          <li>
+            <NavLink to="/notes" className={menuClass}>
+              {({ isActive }) => (
+                <>
+                  <FaStickyNote className={iconClass(isActive)} />
+                  Notes
                 </>
               )}
             </NavLink>

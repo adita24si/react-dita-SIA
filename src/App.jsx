@@ -15,6 +15,7 @@ const Orders = React.lazy(() => import("./pages/Orders"));
 const AddCustomer = React.lazy(() => import("./pages/AddCustomer"));
 const AddOrder = React.lazy(() => import("./pages/AddOrder"));
 const ErrorPage = React.lazy(() => import("./pages/ErrorPage"));
+const Note = React.lazy(() => import("./pages/note"));
 
 // Auth & Detail Pages
 const Login = React.lazy(() => import("./pages/auth/Login"));
@@ -47,6 +48,7 @@ function App() {
           {/* PRODUCTS ROUTES */}
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/notes" element={<Note />} />
 
           {/* Error Routes */}
           <Route path="/400" element={<ErrorPage code="400" description="Bad Request." image="/img/400.png" />} />
